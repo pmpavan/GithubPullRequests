@@ -1,0 +1,8 @@
+ext{
+    supportLibVersion = '27.1.1'
+    constraintLayoutVersion = '1.1.2'
+    junitVersion = '4.12'
+    daggerVersion = '2.13'
+    eventbusVersion = '3.0.0'
+
+}
