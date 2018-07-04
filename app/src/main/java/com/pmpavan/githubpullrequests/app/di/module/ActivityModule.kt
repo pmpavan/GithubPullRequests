@@ -1,30 +1,15 @@
 package com.pmpavan.githubpullrequests.app.di.module
 
+import com.pmpavan.githubpullrequests.ui.MainActivity
 import dagger.Module
-import android.app.Activity
-import android.content.Context
-import com.pmpavan.githubpullrequests.app.di.scope.ActivityScope
-import dagger.Provides
-import dagger.android.AndroidInjectionModule
+import dagger.android.ContributesAndroidInjector
 
 
-@Module(includes = [AndroidInjectionModule::class])
+@Module
 abstract class ActivityModule {
 
-    private lateinit var mActivity: Activity
+    @ContributesAndroidInjector
+    abstract fun contributeMainActivity(): MainActivity
 
-    fun ActivityModule(activity: Activity) {
-        mActivity = activity
-    }
 
-    @Provides
-    @ActivityScope
-    fun provideContext(): Context {
-        return mActivity
-    }
-
-    @Provides
-    fun provideActivity(): Activity {
-        return mActivity
-    }
 }

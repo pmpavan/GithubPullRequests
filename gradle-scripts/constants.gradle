@@ -4,5 +4,6 @@ ext{
     junitVersion = '4.12'
     daggerVersion = '2.13'
     eventbusVersion = '3.0.0'
+    gsonVersion = "2.8.2"
 
 }

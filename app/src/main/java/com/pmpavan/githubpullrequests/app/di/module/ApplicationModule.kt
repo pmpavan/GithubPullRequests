@@ -14,33 +14,24 @@ import org.greenrobot.eventbus.EventBus
 import javax.inject.Singleton
 
 
-@Module(includes = [AndroidInjectionModule::class])
-abstract class ApplicationModule(app: Application) {
+@Module
+ class ApplicationModule(val app: Application) {
 
-    private var mApplication: Application = app
-
-
-    @Binds
     @Singleton
-    abstract fun application(app: GPRApplication): Application
+    @Provides
+    fun provideContext(): Context {
+        return app
+    }
 
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [MainActivityModule::class])
-    abstract fun mainActivityInjector(): MainActivity
+    @Singleton
+    @Provides
+    fun provideApplication(): Application {
+        return app
+    }
 
-//    @Singleton
-//    @Provides
-//    fun provideContext(): Context {
-//        return mApplication
-//    }
-//
-//    @Singleton
-//    @Provides
-//    fun provideApplication(): Application {
-//        return mApplication
-//    }
-//
-//    @Singleton
-//    @Provides
-//    abstract fun getEventBus(): EventBus
+    @Singleton
+    @Provides
+    fun getEventBus(): EventBus = EventBus.getDefault()
+
+
 }

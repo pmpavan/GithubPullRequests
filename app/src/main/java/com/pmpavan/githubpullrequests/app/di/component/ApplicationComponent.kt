@@ -1,25 +1,23 @@
 package com.pmpavan.githubpullrequests.app.di.component
 
-import android.app.Application
 import com.pmpavan.githubpullrequests.app.GPRApplication
+import com.pmpavan.githubpullrequests.app.di.module.ActivityModule
 import com.pmpavan.githubpullrequests.app.di.module.ApplicationModule
 import dagger.Component
-import dagger.android.AndroidInjector
+import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = [ApplicationModule::class])
-interface ApplicationComponent : AndroidInjector<GPRApplication> {
+@Component(modules = [ApplicationModule::class, AndroidInjectionModule::class, ActivityModule::class])
+interface ApplicationComponent {
 
-    @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<GPRApplication>()
+    fun inject(app: GPRApplication)
 
-//    fun getContext(): Context
+    //    fun getContext(): Context
 //
 //    fun getApplication(): GPRApplication
 //
-    fun inject(app: Application)
 
 //    override fun inject(instance: DaggerApplication)
 //
