@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.pmpavan.githubpullrequests.R
 import com.pmpavan.githubpullrequests.databinding.ActivityMainBinding
 import com.pmpavan.githubpullrequests.ui.base.BaseActivity
+import com.pmpavan.githubpullrequests.ui.util.SimpleDividerItemDecoration
 import com.pmpavan.githubpullrequests.viewmodel.PullRequestListAdapter
 import com.pmpavan.githubpullrequests.viewmodel.PullRequestViewModel
 import com.pmpavan.githubpullrequests.viewmodel.constants.PullRequestConstants
@@ -46,6 +47,7 @@ class MainActivity : BaseActivity() {
 
         adapter.handler = viewModel
         viewDataBinding.list.adapter = adapter
+//        viewDataBinding.list.addItemDecoration( SimpleDividerItemDecoration(this))
 
         viewDataBinding.requests = listState
         viewModel.data.observe(this@MainActivity, Observer { t ->
