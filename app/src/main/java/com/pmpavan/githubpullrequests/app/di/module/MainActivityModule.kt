@@ -7,8 +7,10 @@ import android.content.Context
 import com.pmpavan.githubpullrequests.app.di.scope.ActivityScope
 import com.pmpavan.githubpullrequests.app.di.scope.ViewModelKey
 import com.pmpavan.githubpullrequests.ui.MainActivity
+import com.pmpavan.githubpullrequests.viewmodel.PullRequestListAdapter
 import com.pmpavan.githubpullrequests.viewmodel.PullRequestViewModel
 import com.pmpavan.githubpullrequests.viewmodel.base.ViewModelFactory
+import com.pmpavan.githubpullrequests.viewmodel.uistate.PullRequestUiState
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -23,13 +25,10 @@ abstract class MainActivityModule {
     @Binds
     @IntoMap
     @ViewModelKey(PullRequestViewModel::class)
-    abstract fun bindHomeViewModel(model: PullRequestViewModel): ViewModel
+    abstract fun bindPullRequestViewModel(model: PullRequestViewModel): ViewModel
 
     @Binds
-    abstract fun bindAppViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-//    @Binds
-//    @ActivityScope
-//    abstract fun providePullRequestFactory(pullRequestViewModel: PullRequestViewModel): ViewModelProvider.Factory
+    abstract fun bindPullRequestViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
 }
 

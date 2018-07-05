@@ -1,5 +1,6 @@
 package com.pmpavan.githubpullrequests.ui
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
@@ -8,9 +9,11 @@ import android.widget.Toast
 import com.pmpavan.githubpullrequests.R
 import com.pmpavan.githubpullrequests.databinding.ActivityMainBinding
 import com.pmpavan.githubpullrequests.ui.base.BaseActivity
+import com.pmpavan.githubpullrequests.viewmodel.PullRequestListAdapter
 import com.pmpavan.githubpullrequests.viewmodel.PullRequestViewModel
 import com.pmpavan.githubpullrequests.viewmodel.constants.PullRequestConstants
 import com.pmpavan.githubpullrequests.viewmodel.events.MainActivityEvent
+import com.pmpavan.githubpullrequests.viewmodel.uistate.PullRequestUiState
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -23,6 +26,10 @@ class MainActivity : BaseActivity() {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
+    @Inject
+    lateinit var adapter: PullRequestListAdapter
+    @Inject
+    lateinit var listState: PullRequestUiState
 
     private lateinit var viewDataBinding: ActivityMainBinding
     private lateinit var viewModel: PullRequestViewModel
@@ -30,7 +37,20 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        registerForEvents(eventBus)
         invokeDataBinding()
+        setupControllers()
+    }
+
+    private fun setupControllers() {
+
+        adapter.handler = viewModel
+        viewDataBinding.list.adapter = adapter
+
+        viewDataBinding.requests = listState
+        viewModel.data.observe(this@MainActivity, Observer { t ->
+            listState.update(t!!)
+        })
     }
 
 
@@ -43,7 +63,6 @@ class MainActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        registerForEvents(eventBus)
     }
 
     override fun onStop() {
@@ -53,9 +72,9 @@ class MainActivity : BaseActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onViewModelInteraction(mainActivityEvent: MainActivityEvent) {
-        when(mainActivityEvent.id){
-            PullRequestConstants.ON_SEARCH_CLICKED->{
-                Toast.makeText(this@MainActivity,mainActivityEvent.message,Toast.LENGTH_SHORT).show()
+        when (mainActivityEvent.id) {
+            PullRequestConstants.ON_SEARCH_CLICKED -> {
+                Toast.makeText(this@MainActivity, mainActivityEvent.message, Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -394,4 +394,10 @@ class GithubPullsResponse {
     fun setDocumentationUrl(documentationUrl: String) {
         this.documentationUrl = documentationUrl
     }
+
+    override fun toString(): String {
+        return "GithubPullsResponse(message=$message, documentationUrl=$documentationUrl, url=$url, id=$id, nodeId=$nodeId, htmlUrl=$htmlUrl, diffUrl=$diffUrl, patchUrl=$patchUrl, issueUrl=$issueUrl, number=$number, state=$state, locked=$locked, title=$title, user=$user, body=$body, createdAt=$createdAt, updatedAt=$updatedAt, closedAt=$closedAt, mergedAt=$mergedAt, mergeCommitSha=$mergeCommitSha, assignee=$assignee, assignees=$assignees, requestedReviewers=$requestedReviewers, requestedTeams=$requestedTeams, labels=$labels, milestone=$milestone, commitsUrl=$commitsUrl, reviewCommentsUrl=$reviewCommentsUrl, reviewCommentUrl=$reviewCommentUrl, commentsUrl=$commentsUrl, statusesUrl=$statusesUrl, head=$head, base=$base, links=$links, authorAssociation=$authorAssociation)"
+    }
+
+
 }
