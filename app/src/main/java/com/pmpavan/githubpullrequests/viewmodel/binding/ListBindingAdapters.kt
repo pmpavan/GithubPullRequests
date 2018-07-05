@@ -30,4 +30,10 @@ object ListBindingAdapters {
             listAdapter.notifyDataSetChanged()
         }
     }
+
+    @BindingAdapter("android:visibility")
+    @JvmStatic
+    fun View.setVisibility(visible: Boolean) {
+        visibility = if (visible) View.VISIBLE else View.GONE
+    }
 }

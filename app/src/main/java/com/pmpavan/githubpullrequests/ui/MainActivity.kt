@@ -9,7 +9,6 @@ import android.widget.Toast
 import com.pmpavan.githubpullrequests.R
 import com.pmpavan.githubpullrequests.databinding.ActivityMainBinding
 import com.pmpavan.githubpullrequests.ui.base.BaseActivity
-import com.pmpavan.githubpullrequests.ui.util.SimpleDividerItemDecoration
 import com.pmpavan.githubpullrequests.viewmodel.PullRequestListAdapter
 import com.pmpavan.githubpullrequests.viewmodel.PullRequestViewModel
 import com.pmpavan.githubpullrequests.viewmodel.constants.PullRequestConstants
@@ -75,7 +74,7 @@ class MainActivity : BaseActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onViewModelInteraction(mainActivityEvent: MainActivityEvent) {
         when (mainActivityEvent.id) {
-            PullRequestConstants.ON_SEARCH_CLICKED -> {
+            PullRequestConstants.ON_SEARCH_ERROR -> {
                 Toast.makeText(this@MainActivity, mainActivityEvent.message, Toast.LENGTH_SHORT).show()
             }
         }

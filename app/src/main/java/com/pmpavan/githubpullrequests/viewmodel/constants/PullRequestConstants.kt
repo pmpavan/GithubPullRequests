@@ -1,5 +1,5 @@
 package com.pmpavan.githubpullrequests.viewmodel.constants
 
 object PullRequestConstants {
-    const val ON_SEARCH_CLICKED = 100
+    const val ON_SEARCH_ERROR = 100
 }
