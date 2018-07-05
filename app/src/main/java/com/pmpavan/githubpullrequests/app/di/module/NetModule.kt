@@ -2,6 +2,8 @@ package com.pmpavan.githubpullrequests.app.di.module
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.pmpavan.githubpullrequests.data.GithubApi
+import com.pmpavan.githubpullrequests.data.GithubApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -30,8 +32,14 @@ class NetModule(private val baseUrl: String) {
                 .build()
     }
 
-//    @Provides
-//    @Singleton
-//    fun providesApiInterface(retrofit: Retrofit): ApiInterface = retrofit.create(
-//            ApiInterface::class.java)
+    @Provides
+    @Singleton
+    fun providesApiInterface(retrofit: Retrofit): GithubApiService = retrofit.create(
+            GithubApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun providesApi(githubApiService: GithubApiService): GithubApi = GithubApi(githubApiService)
+
+
 }
