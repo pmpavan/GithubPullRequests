@@ -6,6 +6,7 @@ import android.content.Context
 import com.pmpavan.githubpullrequests.app.di.component.ApplicationComponent
 import com.pmpavan.githubpullrequests.app.di.component.DaggerApplicationComponent
 import com.pmpavan.githubpullrequests.app.di.module.ApplicationModule
+import com.pmpavan.githubpullrequests.app.di.module.NetModule
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -24,20 +25,16 @@ class GPRApplication : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-        DaggerApplicationComponent.builder().applicationModule(ApplicationModule(this)).build().inject(this)
+        DaggerApplicationComponent.builder()
+                .applicationModule(ApplicationModule(this))
+                .netModule(NetModule(AppConstants.BASE_URL))
+                .build()
+                .inject(this)
     }
 
-
-    companion object {
-        @JvmStatic
-        lateinit var applicationComponent: ApplicationComponent
-    }
 
     operator fun get(context: Context): GPRApplication {
         return context.applicationContext as GPRApplication
     }
 
-    fun getComponent(): ApplicationComponent {
-        return applicationComponent
-    }
 }

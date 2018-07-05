@@ -23,6 +23,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled true
+    }
 //    kapt {
 //        generateStubs = true
 //    }
@@ -43,9 +46,24 @@ dependencies {
     //gson
     implementation "com.google.code.gson:gson:${gsonVersion}"
 
-
     //eventbus
     implementation "org.greenrobot:eventbus:${eventbusVersion}"
+
+    //design
+    implementation 'com.android.support:design:27.1.1'
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxjava:${rxjavaVersion}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}"
+
+    //Lifecycle
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+
+
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

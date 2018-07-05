@@ -9,7 +9,7 @@ import dagger.Module
 @Module
 abstract class BaseActivityModule {
 
-    @Binds
-    @ActivityScope
-    abstract fun activityContext(activity: Activity): Context
+//    @Binds
+//    @ActivityScope
+//    abstract fun activityContext(activity: Activity): Context
 }
