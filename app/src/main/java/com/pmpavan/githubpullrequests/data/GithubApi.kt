@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class GithubApi @Inject constructor(val apiInterface: GithubApiService) : BaseApi() {
 
-    fun getPullRequestsFromApi(userName: String, projectName: String, state: String): Single<GithubPullsResponse> {
+    fun getPullRequestsFromApi(userName: String, projectName: String, state: String): Single<List<GithubPullsResponse>> {
         return apiInterface.getGithubPullRequets(userName, projectName, state)
     }
 }

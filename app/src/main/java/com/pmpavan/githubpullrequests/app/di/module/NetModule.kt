@@ -4,6 +4,8 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.pmpavan.githubpullrequests.data.GithubApi
 import com.pmpavan.githubpullrequests.data.GithubApiService
+import com.pmpavan.githubpullrequests.domain.interactor.GithubInteractor
+import com.pmpavan.githubpullrequests.domain.interactor.impl.GithubInteractorImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -41,5 +43,8 @@ class NetModule(private val baseUrl: String) {
     @Singleton
     fun providesApi(githubApiService: GithubApiService): GithubApi = GithubApi(githubApiService)
 
+    @Provides
+    @Singleton
+    fun providesGithubInteractor(githubApi: GithubApi): GithubInteractor = GithubInteractorImpl(githubApi)
 
 }

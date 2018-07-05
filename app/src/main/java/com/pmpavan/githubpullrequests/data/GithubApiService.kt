@@ -10,5 +10,5 @@ import retrofit2.http.Query
 interface GithubApiService {
 
     @GET("repos/{userName}/{projectName}/pulls")
-    fun getGithubPullRequets(@Path("userName") userName: String, @Path("projectName") projectName: String, @Query("state") state: String): Single<GithubPullsResponse>
+    fun getGithubPullRequets(@Path("userName") userName: String, @Path("projectName") projectName: String, @Query("state") state: String): Single<List<GithubPullsResponse>>
 }
