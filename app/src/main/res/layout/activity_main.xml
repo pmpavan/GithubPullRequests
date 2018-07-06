@@ -48,6 +48,8 @@
         <ProgressBar
             android:layout_width="50dp"
             android:layout_height="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_button"
             android:visibility="@{!vm.contentVisibility}" />
 
