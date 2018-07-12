@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.pmpavan.githubpullrequests.R
 import com.pmpavan.githubpullrequests.databinding.ActivityMainBinding
 import com.pmpavan.githubpullrequests.ui.base.BaseActivity
+import com.pmpavan.githubpullrequests.ui.util.UiUtils
 import com.pmpavan.githubpullrequests.viewmodel.PullRequestListAdapter
 import com.pmpavan.githubpullrequests.viewmodel.PullRequestViewModel
 import com.pmpavan.githubpullrequests.viewmodel.constants.PullRequestConstants
@@ -19,7 +20,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
+class GithubActivity : BaseActivity() {
 
     @Inject
     lateinit var eventBus: EventBus
@@ -45,25 +46,21 @@ class MainActivity : BaseActivity() {
     private fun setupControllers() {
 
         adapter.handler = viewModel
-        viewDataBinding.list.adapter = adapter
-//        viewDataBinding.list.addItemDecoration( SimpleDividerItemDecoration(this))
+//        viewDataBinding.list.addItemDecoration(SimpleDividerItemDecoration(this))
 
+        viewDataBinding.list.adapter = adapter
         viewDataBinding.requests = listState
-        viewModel.data.observe(this@MainActivity, Observer { t ->
+        viewModel.data.observe(this@GithubActivity, Observer { t ->
             listState.update(t!!)
         })
     }
 
 
     private fun invokeDataBinding() {
-        viewModel = ViewModelProviders.of(this@MainActivity, factory).get(PullRequestViewModel::class.java)
-        viewDataBinding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
+        viewModel = ViewModelProviders.of(this@GithubActivity, factory).get(PullRequestViewModel::class.java)
+        viewDataBinding = DataBindingUtil.setContentView(this@GithubActivity, R.layout.activity_main)
         viewDataBinding.vm = viewModel
         viewDataBinding.executePendingBindings()
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
     override fun onStop() {
@@ -75,7 +72,10 @@ class MainActivity : BaseActivity() {
     fun onViewModelInteraction(mainActivityEvent: MainActivityEvent) {
         when (mainActivityEvent.id) {
             PullRequestConstants.ON_SEARCH_ERROR -> {
-                Toast.makeText(this@MainActivity, mainActivityEvent.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@GithubActivity, mainActivityEvent.message, Toast.LENGTH_SHORT).show()
+            }
+            PullRequestConstants.CLOSE_KEYBOARD -> {
+                UiUtils.hideKeyboard(this, viewDataBinding.projectName.editText)
             }
         }
     }

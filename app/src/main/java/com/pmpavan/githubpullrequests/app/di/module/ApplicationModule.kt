@@ -35,18 +35,4 @@ class ApplicationModule(val app: Application) {
     @Provides
     fun getEventBus(): EventBus = EventBus.getDefault()
 
-//    @Singleton
-//    @Provides
-//    fun getNetworkProvider(): Retrofit {
-//        return Retrofit.Builder()
-//                .baseUrl(AppConstants.BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//                .build()
-//    }
-
-//    @Provides
-//    fun providePullRequestFactory(context: Context, eventBus: EventBus): ViewModelProvider.Factory {
-//        return PullRequestViewModel.Factory(context, eventBus)
-//    }
 }

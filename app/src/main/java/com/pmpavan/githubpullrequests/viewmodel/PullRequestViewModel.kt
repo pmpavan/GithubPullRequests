@@ -27,6 +27,7 @@ class PullRequestViewModel @Inject constructor(var context: Context, var eventBu
 
     fun onSearchClicked() {
 
+        closeKeyboard()
         val text = searchTxt.get()!!.split("/")
         contentVisibility.set(false)
         githubInteractor.getPullRequestsFromApi(text[0], text[1], "open")
@@ -46,6 +47,11 @@ class PullRequestViewModel @Inject constructor(var context: Context, var eventBu
                 }, {
                     onError(it)
                 })
+    }
+    private fun closeKeyboard(){
+        val mainActivityEvent = MainActivityEvent()
+        mainActivityEvent.id = PullRequestConstants.CLOSE_KEYBOARD
+        eventBus.post(mainActivityEvent)
     }
 
 
